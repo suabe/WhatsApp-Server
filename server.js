@@ -27,7 +27,7 @@ const server = http.createServer(app)
  */
 const {Server} = require('socket.io');
 const io = new Server(server)
-const port = process.env.PORT_NODE
+const port = process.env.PORT_NODE || 3000;
 app.use((req, res, next) => {
     res.set('Cache-Control', 'no-store')
     req.io = io
@@ -55,5 +55,5 @@ io.on('connection', (socket) => {
        wa.deleteCredentials(device,io)
     })
 })
-server.listen(port, console.log(`Server run and listening port: ${port}`));
+server.listen(port, "0.0.0.0" ,console.log(`Server run and listening port: ${port}`));
 
